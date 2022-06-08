@@ -1,8 +1,9 @@
 import { useCallback, useEffect } from 'react'
 import { useRouter } from "next/router"
 
-const Analytics = require('analytics-node')
-const analytics = new Analytics('AoKlj2CmD4W78Av3gEsZn7B6CcrcvcoE')
+import getAnalyticsInstance from '../../helpers'
+
+const analytics = getAnalyticsInstance()
 
 const AnotherPage = () => {
     const router = useRouter()
