@@ -10,9 +10,13 @@ const Home = () => {
         } else {
             const credential = JSON.parse(localStorage.getItem('credential'))
 
-            alert(JSON.stringify(credential, null, 2))
+            console.log(JSON.stringify(credential, null, 2))
         }
     }, [router])
+
+    const goToAnotherPage = () => {
+        router.push('/another-page')
+    }
 
     const logout = () => {
         localStorage.removeItem('credential')
@@ -37,14 +41,30 @@ const Home = () => {
         >
             You have successfully logged in
 
-            <input
-                onClick={logout}
-                type='button'
-                value='Log out'
-                style={{
+            <div
+                style = {{
+                    display: 'flex',
                     marginTop: 20
                 }}
-            />
+            >
+                <input
+                    onClick={goToAnotherPage}
+                    type='button'
+                    value='Go To Another Page'
+                />
+
+                <div
+                    style={{
+                        width: 20
+                    }}
+                />
+
+                <input
+                    onClick={logout}
+                    type='button'
+                    value='Log Out'
+                />
+            </div>
         </div>
     )
 }
