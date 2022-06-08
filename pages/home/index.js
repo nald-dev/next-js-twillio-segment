@@ -1,6 +1,9 @@
 import { useCallback, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
+const Analytics = require('analytics-node')
+const analytics = new Analytics('AoKlj2CmD4W78Av3gEsZn7B6CcrcvcoE')
+
 const Home = () => {
     const router = useRouter()
 
@@ -8,9 +11,12 @@ const Home = () => {
         if(!localStorage.getItem('credential')) {
             router.replace('/')
         } else {
-            const credential = JSON.parse(localStorage.getItem('credential'))
+            const { username } = JSON.parse(localStorage.getItem('credential'))
 
-            console.log(JSON.stringify(credential, null, 2))
+            analytics.page({
+                userId: username,
+                name: 'home'
+            })
         }
     }, [router])
 

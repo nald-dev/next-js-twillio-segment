@@ -1,5 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+
+const Analytics = require('analytics-node')
+const analytics = new Analytics('AoKlj2CmD4W78Av3gEsZn7B6CcrcvcoE')
 
 const Login = () => {
   const [ username, setUsername ] = useState('')
@@ -7,11 +10,11 @@ const Login = () => {
 
   const router = useRouter()
 
-  const checkSession = () => {
+  const checkSession = useCallback(() => {
     if (localStorage.getItem('credential')) {
       router.replace('/home')
     }
-  }
+  }, [router])
 
   const submit = () => {
     localStorage.setItem('credential', JSON.stringify({
@@ -19,12 +22,25 @@ const Login = () => {
       password
     }))
 
+    analytics.identify({
+      userId: username
+    })
+
+    analytics.track({
+      userId: username,
+      event: 'Log In',
+      properties: {
+        username,
+        date: (new Date()).toString()
+      }
+    })
+
     router.replace('/home')
   }
 
   useEffect(() => {
     checkSession()
-  }, [])
+  }, [checkSession])
 
   return (
     <div
