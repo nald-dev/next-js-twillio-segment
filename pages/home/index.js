@@ -69,6 +69,4 @@ const Home = () => {
     )
 }
 
-// AoKlj2CmD4W78Av3gEsZn7B6CcrcvcoE
-
 export default Home
