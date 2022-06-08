@@ -58,7 +58,7 @@ const Login = () => {
       </h2>
 
       <input
-        onChange={({target}) => setUsername(target.value)}
+        onChange={({target: {value}}) => setUsername(value)}
         placeholder='Username'
         style={{
           width: 250
@@ -67,7 +67,7 @@ const Login = () => {
       />
 
       <input
-        onChange={({target}) => setPassword(target.value)}
+        onChange={({target: {value}}) => setPassword(value)}
         placeholder='Password'
         type='password'
         style={{
@@ -84,8 +84,7 @@ const Login = () => {
           marginTop: 20,
           width: 250
         }}
-      >
-      </input>
+      />
     </div>
   )
 }
