@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 const Home = () => {
     const router = useRouter()
 
-    const checkSession = () => {
+    const checkSession = useCallback(() => {
         if(!localStorage.getItem('credential')) {
             router.replace('/')
+        } else {
+            const credential = JSON.parse(localStorage.getItem('credential'))
+
+            alert(JSON.stringify(credential, null, 2))
         }
-    }
+    }, [router])
 
     const logout = () => {
         localStorage.removeItem('credential')
@@ -18,7 +22,7 @@ const Home = () => {
 
     useEffect(() => {
         checkSession()
-    }, [])
+    }, [checkSession])
 
     return (
         <div
